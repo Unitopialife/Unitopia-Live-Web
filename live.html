@@ -191,30 +191,6 @@
         display: block;
       }
 
-      .info-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 18px;
-      }
-
-      .card {
-        padding: 18px;
-        border-radius: 22px;
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.03);
-      }
-
-      .card strong {
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      .card span {
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
       @media (max-width: 900px) {
         .topbar .wrap,
         .stream-head {
@@ -222,8 +198,7 @@
           align-items: flex-start;
         }
 
-        .stream-grid,
-        .info-grid {
+        .stream-grid {
           grid-template-columns: 1fr;
         }
       }
@@ -316,28 +291,6 @@
             </div>
           </div>
 
-          <div class="info-grid">
-            <article class="card">
-              <strong>Hinweis</strong>
-              <span>
-                Für GitHub Pages muss der Twitch-Parameter `parent` zur Domain der
-                veröffentlichten Seite passen.
-              </span>
-            </article>
-            <article class="card">
-              <strong>Passende Größe</strong>
-              <span>
-                Das Embed nutzt jetzt ein 16:9-Verhältnis und passt sich dem
-                Bildschirm an.
-              </span>
-            </article>
-            <article class="card">
-              <strong>Weiter geht's</strong>
-              <span>
-                Du kannst hier später noch Chat, Schedule oder Stream-Regeln ergänzen.
-              </span>
-            </article>
-          </div>
         </section>
       </div>
     </main>
