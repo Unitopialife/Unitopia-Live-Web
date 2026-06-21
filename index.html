@@ -3,59 +3,144 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Unitopia Live</title>
     <meta
       name="description"
-      content="Eine einfache, responsive Startseite für GitHub Pages."
+      content="Unitopia Live - eine GTA V FiveM Webseite mit Home, Über uns, Server und Live."
     />
+    <title>Unitopia Live</title>
     <style>
       :root {
-        color-scheme: light;
-        --bg: #f6f1e8;
-        --bg-accent: #efe4d3;
-        --text: #1f1a17;
-        --muted: #5f5247;
-        --card: rgba(255, 255, 255, 0.72);
-        --border: rgba(31, 26, 23, 0.12);
-        --shadow: 0 24px 80px rgba(87, 59, 34, 0.14);
-        --accent: #c96f42;
-        --accent-strong: #a84f2a;
+        color-scheme: dark;
+        --bg: #07090d;
+        --bg-2: #0f131a;
+        --panel: rgba(14, 18, 26, 0.82);
+        --panel-2: rgba(255, 255, 255, 0.04);
+        --text: #f5f7fb;
+        --muted: #a8b0bd;
+        --border: rgba(255, 255, 255, 0.08);
+        --accent: #ff7a18;
+        --accent-2: #ffb36b;
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
       }
 
       * {
         box-sizing: border-box;
       }
 
-      html,
-      body {
-        margin: 0;
-        min-height: 100%;
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
+        margin: 0;
+        min-height: 100vh;
         font-family: Arial, Helvetica, sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, #fff8ef 0, transparent 35%),
-          radial-gradient(circle at bottom right, #f2d8c4 0, transparent 30%),
-          linear-gradient(180deg, var(--bg), var(--bg-accent));
+          radial-gradient(circle at top left, rgba(255, 122, 24, 0.18), transparent 30%),
+          radial-gradient(circle at top right, rgba(77, 161, 255, 0.15), transparent 28%),
+          linear-gradient(180deg, var(--bg), var(--bg-2));
       }
 
-      .shell {
-        min-height: 100vh;
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(7, 9, 13, 0.72);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 10px 24px rgba(255, 122, 24, 0.28);
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        border: 1px solid transparent;
+        transition: 0.2s ease;
+      }
+
+      .nav a:hover,
+      .nav a.active {
+        color: var(--text);
+        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero {
+        padding: 42px 0 26px;
+      }
+
+      .hero-grid {
         display: grid;
-        place-items: center;
-        padding: 24px;
+        grid-template-columns: 1.35fr 0.9fr;
+        gap: 24px;
+        align-items: stretch;
       }
 
-      .card {
-        width: min(920px, 100%);
-        padding: clamp(28px, 5vw, 56px);
+      .panel {
         border: 1px solid var(--border);
         border-radius: 28px;
-        background: var(--card);
-        backdrop-filter: blur(10px);
+        background: var(--panel);
         box-shadow: var(--shadow);
+      }
+
+      .hero-main {
+        padding: clamp(26px, 4vw, 46px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-main::after {
+        content: "";
+        position: absolute;
+        inset: auto -80px -80px auto;
+        width: 220px;
+        height: 220px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(255, 122, 24, 0.18), transparent 68%);
+        pointer-events: none;
       }
 
       .eyebrow {
@@ -64,34 +149,39 @@
         gap: 10px;
         padding: 8px 14px;
         border-radius: 999px;
-        background: rgba(201, 111, 66, 0.12);
-        color: var(--accent-strong);
-        font-size: 0.92rem;
+        background: rgba(255, 122, 24, 0.12);
+        color: var(--accent-2);
+        font-size: 0.86rem;
         font-weight: 700;
-        letter-spacing: 0.02em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      h1 {
-        margin: 18px 0 14px;
-        font-size: clamp(2.4rem, 7vw, 5.4rem);
-        line-height: 0.95;
-        letter-spacing: -0.05em;
+      h1,
+      h2 {
+        margin: 0;
+        letter-spacing: -0.04em;
       }
 
-      p {
-        margin: 0;
-        max-width: 60ch;
-        font-size: clamp(1.05rem, 2vw, 1.2rem);
-        line-height: 1.7;
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(2.7rem, 7vw, 5.8rem);
+        line-height: 0.94;
+      }
+
+      .lead {
+        margin: 16px 0 0;
+        max-width: 62ch;
         color: var(--muted);
+        line-height: 1.7;
+        font-size: 1.05rem;
       }
 
       .actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 28px;
+        gap: 12px;
+        margin-top: 26px;
       }
 
       .button {
@@ -103,7 +193,7 @@
         border-radius: 999px;
         text-decoration: none;
         font-weight: 700;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
       }
 
       .button:hover {
@@ -111,90 +201,243 @@
       }
 
       .button.primary {
-        color: white;
-        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-        box-shadow: 0 14px 30px rgba(201, 111, 66, 0.28);
+        color: #121212;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
       }
 
       .button.secondary {
         color: var(--text);
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.04);
         border: 1px solid var(--border);
       }
 
-      .grid {
+      .hero-side {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
-        margin-top: 34px;
       }
 
-      .tile {
-        padding: 18px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.56);
+      .stat {
+        padding: 20px;
+        background: var(--panel);
         border: 1px solid var(--border);
+        border-radius: 24px;
       }
 
-      .tile strong {
+      .stat strong {
         display: block;
+        font-size: 1.2rem;
         margin-bottom: 8px;
-        font-size: 1rem;
       }
 
-      .tile span {
+      .stat span {
         color: var(--muted);
         line-height: 1.6;
       }
 
-      @media (max-width: 720px) {
-        .grid {
+      .section {
+        padding: 18px 0 40px;
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .tile {
+        padding: 22px;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+      }
+
+      .tile h3 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+      }
+
+      .tile p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .server-box {
+        margin-top: 18px;
+        padding: 24px;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .server-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .server-step {
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+      }
+
+      .server-step strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .server-step span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .section-title {
+        margin-bottom: 8px;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+      }
+
+      .section-subtitle {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 70ch;
+      }
+
+      .footer {
+        padding: 6px 0 40px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .section-grid,
+        .server-grid {
           grid-template-columns: 1fr;
         }
 
-        .card {
-          border-radius: 22px;
+        .topbar .wrap {
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
     </style>
   </head>
   <body>
-    <main class="shell">
-      <section class="card" aria-labelledby="headline">
-        <div class="eyebrow">GitHub Pages Ready</div>
-        <h1 id="headline">Willkommen bei Unitopia Live</h1>
-        <p>
-          Das ist eine einfache, schnelle Startseite für GitHub Pages. Sie ist
-          komplett statisch, mobilfreundlich und ohne Framework direkt online
-          nutzbar.
-        </p>
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="index.html" aria-label="Unitopia Live Startseite">
+          <span class="brand-mark"></span>
+          <span>Unitopia Live</span>
+        </a>
+        <nav class="nav" aria-label="Hauptnavigation">
+          <a class="active" href="index.html">Home</a>
+          <a href="#ueber-uns">Über uns</a>
+          <a href="#server">Server</a>
+          <a href="live.html">Live</a>
+        </nav>
+      </div>
+    </header>
 
-        <div class="actions">
-          <a class="button primary" href="https://github.com/" target="_blank" rel="noreferrer">
-            GitHub öffnen
-          </a>
-          <a class="button secondary" href="#features">Mehr ansehen</a>
-        </div>
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="panel hero-main">
+            <div class="eyebrow">FiveM · GTA V Roleplay</div>
+            <h1>Unitopia Live</h1>
+            <p class="lead">
+              Eine klare, dunkle FiveM-Webseite mit den wichtigsten Bereichen:
+              Home, Über uns, Server-Infos und einer extra Live-Seite für deinen
+              Twitch-Stream.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="live.html">Zur Live-Seite</a>
+              <a class="button secondary" href="#server">Zum Server</a>
+            </div>
+          </div>
 
-        <div class="grid" id="features">
-          <article class="tile">
-            <strong>Schnell</strong>
-            <span>Ohne Build-Schritt, ohne Abhängigkeiten, sofort deploybar.</span>
-          </article>
-          <article class="tile">
-            <strong>Responsiv</strong>
-            <span>Sieht auf Handy, Tablet und Desktop ordentlich aus.</span>
-          </article>
-          <article class="tile">
-            <strong>Einfach</strong>
-            <span>Ein einzelnes HTML-Dokument reicht für den Start.</span>
-          </article>
+          <div class="hero-side">
+            <div class="stat">
+              <strong>Server Style</strong>
+              <span>GTA V / FiveM Look mit dunklem, modernem Gaming-Design.</span>
+            </div>
+            <div class="stat">
+              <strong>Navigation</strong>
+              <span>Vier Kategorien, sauber getrennt und direkt verlinkt.</span>
+            </div>
+            <div class="stat">
+              <strong>Live-Seite</strong>
+              <span>Eigene HTML-Seite für Twitch-Embeds und Stream-Infos.</span>
+            </div>
+          </div>
         </div>
-        <div class="twitch">
-          <iframe src="https://player.twitch.tv/?channel=lowyyy95&parent=https://unitopialife.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        </div>
+      </section>
 
+      <section class="section" id="ueber-uns">
+        <div class="wrap">
+          <h2 class="section-title">Über uns</h2>
+          <p class="section-subtitle">
+            Hier kannst du deinen Server kurz vorstellen. Zum Beispiel:
+            Was macht Unitopia aus, welche Stimmung soll der Server haben und
+            warum sollten Leute bei euch spielen?
+          </p>
+
+          <div class="section-grid">
+            <article class="tile">
+              <h3>Community</h3>
+              <p>Eine freundliche und aktive Community ist oft das Herz von FiveM.</p>
+            </article>
+            <article class="tile">
+              <h3>Roleplay</h3>
+              <p>Stelle hier deinen RP-Stil vor: entspannt, ernsthaft oder gemischt.</p>
+            </article>
+            <article class="tile">
+              <h3>Vision</h3>
+              <p>Erkläre kurz, wohin sich der Server entwickeln soll.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="server">
+        <div class="wrap">
+          <h2 class="section-title">So kommt ihr auf den Server</h2>
+          <p class="section-subtitle">
+            Statt einer Whitelist kannst du hier ganz einfach die Join-Schritte
+            erklären. Ich habe dir dafür eine neutrale Vorlage gebaut, die du
+            später nur noch mit deinem echten Discord-Link, der Server-IP oder
+            deinen Regeln füllst.
+          </p>
+
+          <div class="server-box">
+            <div class="server-grid">
+              <div class="server-step">
+                <strong>1. Discord beitreten</strong>
+                <span>Trage hier deinen Discord-Link ein und leite die Spieler in deine Community.</span>
+              </div>
+              <div class="server-step">
+                <strong>2. Regeln lesen</strong>
+                <span>Kurze Regeln helfen dabei, dass jeder direkt weiß, wie ihr RP spielt.</span>
+              </div>
+              <div class="server-step">
+                <strong>3. FiveM starten</strong>
+                <span>Erkläre, wie man FiveM öffnet und den Server sucht.</span>
+              </div>
+              <div class="server-step">
+                <strong>4. Verbinden</strong>
+                <span>Hier kannst du später die Server-IP oder den Direkt-Connect eintragen.</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
+
+    <footer class="footer">
+      <div class="wrap">Unitopia Live · GitHub Pages</div>
+    </footer>
   </body>
 </html>
